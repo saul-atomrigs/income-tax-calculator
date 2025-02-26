@@ -1,8 +1,5 @@
-import { initMockAPI } from "~/mocks";
 import type { Route } from "./+types/home";
 import { useEffect, useState } from "react";
-
-initMockAPI();
 
 interface User {
   id: string;
