@@ -1,4 +1,4 @@
-import { useUser } from "~/features/user/user.hooks";
+import { useUser } from "~/features/user/hooks";
 import type { Route } from "./+types/home";
 import Loading from "~/components/Loading";
 import Error from "~/components/Error";
