@@ -1,14 +1,7 @@
 import type { Route } from "./+types/home";
 import { useEffect, useState } from "react";
-
-interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  age: number;
-  retirementAge: number;
-  investmentStyle: "stable" | "balanced" | "aggressive";
-}
+import { getUserAPI } from "../remotes";
+import type { User } from "../remotes";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -18,13 +11,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch("/user");
-        const userData = await response.json();
+        const userData = await getUserAPI();
         setUser(userData);
       } catch (error) {
         console.error("Failed to fetch user:", error);
