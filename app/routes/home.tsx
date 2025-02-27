@@ -1,14 +1,6 @@
 import CTAButton from "~/components/CTAButton";
 import Txt from "~/components/Txt";
 import { useUser } from "~/features/user/hooks";
-import type { Route } from "./+types/home";
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
-}
 
 export default function Home() {
   const { user } = useUser();
