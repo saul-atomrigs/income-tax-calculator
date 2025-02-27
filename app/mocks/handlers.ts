@@ -30,8 +30,8 @@ export const handlers = [
   http.get("/user", () => {
     return HttpResponse.json({
       id: "test-id",
-      firstName: "John",
-      lastName: "Maverick",
+      firstName: "안",
+      lastName: "지영",
     });
   }),
 

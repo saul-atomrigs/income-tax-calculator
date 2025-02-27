@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from "react-router";
 import { MockProvider } from "./contexts/MockContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -45,10 +46,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
-    <MockProvider>
-      <Outlet />
-    </MockProvider>
+    <QueryClientProvider client={queryClient}>
+      <MockProvider>
+        <Outlet />
+      </MockProvider>
+    </QueryClientProvider>
   );
 }
 
