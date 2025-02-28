@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
-import { IncomeProvider } from "./contexts/IncomeContext";
+import { IncomeProvider } from "~/features/income/context";
 import { ResultProvider } from "./contexts/ResultContext";
 
 import type { Route } from "./+types/root";

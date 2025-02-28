@@ -1,16 +1,16 @@
-import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
-import { useIncome } from "~/contexts/IncomeContext";
-import { calculateTaxAPI } from "~/remotes";
-import { taxCalculationSchema } from "./schemas";
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useIncome } from '~/features/income/context';
+import { calculateTaxAPI } from '~/remotes';
+import { taxCalculationSchema } from './schemas';
 
 export default function useDeductions() {
   const { income } = useIncome();
   const [deductions, setDeductions] = useState({
-    nationalPension: "",
-    healthInsurance: "",
-    employmentInsurance: "",
-    otherDeductions: "",
+    nationalPension: '',
+    healthInsurance: '',
+    employmentInsurance: '',
+    otherDeductions: '',
   });
 
   const {
@@ -20,7 +20,7 @@ export default function useDeductions() {
   } = useMutation({
     mutationFn: calculateTaxAPI,
     onError: (err) => {
-      console.error("Tax calculation failed:", err);
+      console.error('Tax calculation failed:', err);
     },
   });
 
