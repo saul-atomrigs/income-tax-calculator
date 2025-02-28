@@ -5,4 +5,5 @@ export default [
 
   route("salary", "routes/salary.tsx"),
   route("deductions", "routes/deductions.tsx"),
+  route("results", "routes/results.tsx"),
 ] satisfies RouteConfig;
