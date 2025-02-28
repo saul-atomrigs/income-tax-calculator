@@ -3,6 +3,7 @@ import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { IncomeProvider } from "./contexts/IncomeContext";
+import { ResultProvider } from "./contexts/ResultContext";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -49,9 +50,11 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <MockProvider>
           <IncomeProvider>
-            <Suspense fallback={<Loading message="Loading..." />}>
-              <Outlet />
-            </Suspense>
+            <ResultProvider>
+              <Suspense fallback={<Loading message="Loading..." />}>
+                <Outlet />
+              </Suspense>
+            </ResultProvider>
           </IncomeProvider>
         </MockProvider>
       </QueryClientProvider>
