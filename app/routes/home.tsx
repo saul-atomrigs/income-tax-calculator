@@ -16,7 +16,7 @@ export default function Home() {
         얼마 돌려받을지 알려드려요
       </Txt>
 
-      <CTAButton onClick={() => navigate("/salary-input")}>시작하기</CTAButton>
+      <CTAButton onClick={() => navigate("/salary")}>시작하기</CTAButton>
     </>
   );
 }

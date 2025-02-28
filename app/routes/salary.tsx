@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import CTAButton from "~/components/CTAButton";
 import TextInput from "~/components/TextInput";
 import Txt from "~/components/Txt";
@@ -13,6 +14,11 @@ export default function SalaryInputPage() {
     handleDeductionChange,
     handleSubmit,
   } = useDeductions();
+  const navigate = useNavigate();
+
+  const handleClickNext = () => {
+    navigate("/deductions");
+  };
 
   return (
     <>
@@ -49,7 +55,9 @@ export default function SalaryInputPage() {
           ))}
         </>
 
-        <CTAButton type="submit">계산하기</CTAButton>
+        <CTAButton type="submit" onClick={handleClickNext}>
+          계산하기
+        </CTAButton>
       </form>
 
       {error && (
