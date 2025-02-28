@@ -4,7 +4,7 @@ import TextInput from "~/components/TextInput";
 import Txt from "~/components/Txt";
 import { DEDUCTION_LABELS } from "~/features/deductions/constants";
 import useDeductions from "~/features/deductions/hooks";
-import { useResult } from "~/contexts/ResultContext";
+import { useResult } from "~/features/results/context";
 
 export default function DeductionsPage() {
   const { deductions, handleDeductionChange, handleSubmit } = useDeductions();

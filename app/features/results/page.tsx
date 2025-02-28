@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import CTAButton from "~/components/CTAButton";
 import Txt from "~/components/Txt";
-import { useResult } from "~/contexts/ResultContext";
+import { useResult } from "~/features/results/context";
 import ResultList from "./list";
 
 export default function ResultsPage() {
