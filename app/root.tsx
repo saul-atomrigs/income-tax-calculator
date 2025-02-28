@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import { IncomeProvider } from "./contexts/IncomeContext";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -47,9 +48,11 @@ export default function App() {
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <QueryClientProvider client={queryClient}>
         <MockProvider>
-          <Suspense fallback={<Loading message="Loading..." />}>
-            <Outlet />
-          </Suspense>
+          <IncomeProvider>
+            <Suspense fallback={<Loading message="Loading..." />}>
+              <Outlet />
+            </Suspense>
+          </IncomeProvider>
         </MockProvider>
       </QueryClientProvider>
     </ErrorBoundary>
