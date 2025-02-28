@@ -2,6 +2,7 @@ import CTAButton from "~/components/CTAButton";
 import TextInput from "~/components/TextInput";
 import Txt from "~/components/Txt";
 import { useIncome } from "~/contexts/IncomeContext";
+import { DEDUCTION_LABELS } from "~/features/deductions/constants";
 import useDeductions from "~/features/deductions/hooks";
 
 export default function DeductionsPage() {
@@ -10,19 +11,17 @@ export default function DeductionsPage() {
     useDeductions();
 
   return (
-    <>
-      <Txt size="2xl" weight="bold" style={{ marginBottom: "1rem" }}>
-        공제 항목
+    <div className="container">
+      <Txt size="lg" weight="bold">
+        공제 항목을 입력해주세요
       </Txt>
 
-      <Txt>연봉: {income}원</Txt>
-
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="container">
         {Object.entries(deductions).map(([key, value]) => (
           <TextInput
             key={key}
             name={key}
-            label={key}
+            label={DEDUCTION_LABELS[key]}
             type="number"
             value={value}
             onChange={(e) => handleDeductionChange(key, e.target.value)}
@@ -32,6 +31,6 @@ export default function DeductionsPage() {
 
         <CTAButton type="submit">계산하기</CTAButton>
       </form>
-    </>
+    </div>
   );
 }
