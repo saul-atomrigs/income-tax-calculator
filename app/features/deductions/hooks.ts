@@ -1,10 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { useIncome } from "~/contexts/IncomeContext";
 import { calculateTaxAPI } from "~/remotes";
 import { taxCalculationSchema } from "./schemas";
 
 export default function useDeductions() {
-  const [annualIncome, setAnnualIncome] = useState("");
+  const { income } = useIncome();
   const [deductions, setDeductions] = useState({
     nationalPension: "",
     healthInsurance: "",
@@ -23,10 +24,6 @@ export default function useDeductions() {
     },
   });
 
-  const handleAnnualIncomeChange = (value: string) => {
-    setAnnualIncome(value);
-  };
-
   const handleDeductionChange = (key: string, value: string) => {
     setDeductions((prev) => ({ ...prev, [key]: value }));
   };
@@ -36,7 +33,7 @@ export default function useDeductions() {
 
     try {
       const validatedData = taxCalculationSchema.parse({
-        annualIncome: Number(annualIncome),
+        annualIncome: Number(income),
         deductions: {
           nationalPension: Number(deductions.nationalPension) || undefined,
           healthInsurance: Number(deductions.healthInsurance) || undefined,
@@ -53,11 +50,9 @@ export default function useDeductions() {
   };
 
   return {
-    annualIncome,
     deductions,
     result,
     error,
-    handleAnnualIncomeChange,
     handleDeductionChange,
     handleSubmit,
   };
