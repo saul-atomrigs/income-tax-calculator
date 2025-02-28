@@ -2,15 +2,27 @@ import { useNavigate } from "react-router";
 import CTAButton from "~/components/CTAButton";
 import TextInput from "~/components/TextInput";
 import Txt from "~/components/Txt";
-import { useIncome } from "~/contexts/IncomeContext";
 import { DEDUCTION_LABELS } from "~/features/deductions/constants";
 import useDeductions from "~/features/deductions/hooks";
+import { useResult } from "~/contexts/ResultContext";
 
 export default function DeductionsPage() {
-  const { income } = useIncome();
-  const { deductions, handleDeductionChange, handleSubmit, result } =
-    useDeductions();
+  const { deductions, handleDeductionChange, handleSubmit } = useDeductions();
+  const { setCalculationResult } = useResult();
   const navigate = useNavigate();
+
+  const handleCalculate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const calculationResult = await handleSubmit(e);
+      if (calculationResult) {
+        setCalculationResult(calculationResult);
+        navigate("/results");
+      }
+    } catch (error) {
+      console.error("Calculation failed:", error);
+    }
+  };
 
   return (
     <div className="container">
@@ -18,7 +30,7 @@ export default function DeductionsPage() {
         공제 항목을 입력해주세요
       </Txt>
 
-      <form onSubmit={handleSubmit} className="container">
+      <form onSubmit={handleCalculate} className="container">
         {Object.entries(deductions).map(([key, value]) => (
           <TextInput
             key={key}
@@ -31,9 +43,7 @@ export default function DeductionsPage() {
           />
         ))}
 
-        <CTAButton type="submit" onClick={() => navigate("/results")}>
-          계산하기
-        </CTAButton>
+        <CTAButton type="submit">계산하기</CTAButton>
       </form>
     </div>
   );

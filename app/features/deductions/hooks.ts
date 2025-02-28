@@ -43,15 +43,16 @@ export default function useDeductions() {
         },
       });
 
-      calculateTax(validatedData);
+      const result = await calculateTaxAPI(validatedData);
+      return result;
     } catch (err) {
       console.error(err);
+      throw err;
     }
   };
 
   return {
     deductions,
-    result,
     error,
     handleDeductionChange,
     handleSubmit,
