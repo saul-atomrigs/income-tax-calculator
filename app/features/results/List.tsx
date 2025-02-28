@@ -1,6 +1,6 @@
-import ResultItem from "./Element";
 import { formatCurrency } from "~/utils";
 import type { TaxCalculationResponse } from "~/remotes";
+import ResultItem from "./item";
 
 export default function ResultList(result: TaxCalculationResponse) {
   const { incomeTax, residentTax, totalTax, netSalary } = result;

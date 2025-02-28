@@ -31,7 +31,7 @@ export const handlers = [
     return HttpResponse.json({
       id: "test-id",
       firstName: "안",
-      lastName: "지영",
+      lastName: "이솔",
     });
   }),
 
