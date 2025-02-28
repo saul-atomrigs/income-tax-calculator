@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router";
 import CTAButton from "~/components/CTAButton";
 import Txt from "~/components/Txt";
 import { useUser } from "~/features/user/hooks";
 
 export default function Home() {
   const { user } = useUser();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -14,7 +16,7 @@ export default function Home() {
         얼마 돌려받을지 알려드려요
       </Txt>
 
-      <CTAButton onClick={() => {}}>시작하기</CTAButton>
+      <CTAButton onClick={() => navigate("/salary-input")}>시작하기</CTAButton>
     </>
   );
 }
