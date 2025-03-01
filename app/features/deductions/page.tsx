@@ -7,14 +7,14 @@ import useDeductions from "~/features/deductions/hooks";
 import { useResult } from "~/features/results/context";
 
 export default function DeductionsPage() {
-  const { deductions, handleDeductionChange, handleSubmit } = useDeductions();
+  const { deductions, handleDeductionChange, getTaxResults } = useDeductions();
   const { setCalculationResult } = useResult();
   const navigate = useNavigate();
 
   const handleCalculate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const calculationResult = await handleSubmit(e);
+      const calculationResult = await getTaxResults(e);
       if (calculationResult) {
         setCalculationResult(calculationResult);
         navigate("/results");
