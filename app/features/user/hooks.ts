@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { type User, getUserAPI } from "~/remotes";
 
 export function useUser() {
@@ -6,7 +6,7 @@ export function useUser() {
     data: user = { firstName: "", lastName: "" },
     isLoading: userLoading,
     error: userError,
-  } = useQuery({
+  } = useSuspenseQuery({
     queryKey: ["user"],
     queryFn: getUserAPI,
   });
