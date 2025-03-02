@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router";
 import { ErrorBoundary } from "react-error-boundary";
-import CTAButton from "~/components/CTAButton";
+import DualCTAButton from "~/components/DualCTAButton";
+import Button from "~/components/Button";
 import Txt from "~/components/Txt";
 import ResultList from "./list";
-import { ROUTES } from "~/routes";
 import { ResultErrorFallback } from "./error-fallback";
+import { ROUTES } from "~/routes";
 import { useResult } from "./context";
 
 export default function ResultsPage() {
@@ -27,10 +28,13 @@ export default function ResultsPage() {
 
         <ResultList {...calculationResult} />
 
-        <div className="mt-8 space-y-4">
-          <CTAButton onClick={() => navigate("/income")}>
-            다시 계산하기
-          </CTAButton>
+        <div className="mt-8">
+          <DualCTAButton>
+            <Button variant="secondary" onClick={() => navigate(ROUTES.start)}>
+              처음으로
+            </Button>
+            <Button onClick={() => navigate("/income")}>다시 계산하기</Button>
+          </DualCTAButton>
         </div>
       </div>
     </ErrorBoundary>
