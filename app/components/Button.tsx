@@ -8,7 +8,6 @@ interface ButtonProps {
   fullWidth?: boolean;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
-  style?: React.CSSProperties;
 }
 
 export default function Button({
@@ -18,7 +17,6 @@ export default function Button({
   onClick,
   disabled = false,
   type = "button",
-  style,
 }: ButtonProps) {
   const bgColor =
     variant === "primary" ? colors["primary-500"] : colors["secondary-500"];
@@ -40,7 +38,6 @@ export default function Button({
         opacity: disabled ? 0.7 : 1,
         width: fullWidth ? "100%" : "auto",
         transition: "background-color 0.2s ease",
-        ...style,
       }}
       onMouseOver={(e) => {
         if (!disabled) {
