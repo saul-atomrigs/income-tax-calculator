@@ -9,6 +9,7 @@ export default [
 ] satisfies RouteConfig;
 
 export const ROUTES = {
+  start: "/",
   income: "/income",
   deductions: "/deductions",
   results: "/results",

@@ -3,16 +3,17 @@ import CTAButton from "~/components/CTAButton";
 import Txt from "~/components/Txt";
 import { useResult } from "~/features/results/context";
 import ResultList from "./list";
+import { ROUTES } from "~/routes";
 
 export default function ResultsPage() {
-  const { calculationResult } = useResult();
   const navigate = useNavigate();
+  const { calculationResult } = useResult();
 
   if (!calculationResult) {
     return (
       <div className="container">
         <Txt size="lg">계산 결과가 없습니다.</Txt>
-        <CTAButton onClick={() => navigate("/")}>처음으로</CTAButton>
+        <CTAButton onClick={() => navigate(ROUTES.start)}>처음으로</CTAButton>
       </div>
     );
   }
