@@ -1,5 +1,5 @@
-import { forwardRef } from 'react';
-import type { ChangeEvent } from 'react';
+import { forwardRef } from "react";
+import type { ChangeEvent } from "react";
 
 interface TextInputProps {
   id?: string;
@@ -8,7 +8,7 @@ interface TextInputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   placeholder?: string;
-  type?: 'text' | 'email' | 'password' | 'number' | 'date';
+  type?: "text" | "email" | "password" | "number" | "date";
   error?: string;
   required?: boolean;
   disabled?: boolean;
@@ -25,28 +25,17 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       onChange,
       label,
       placeholder,
-      type = 'text',
+      type = "text",
       error,
       required = false,
       disabled = false,
       style = {},
-      autoFocus = false,
+      autoFocus = true,
     },
     ref
   ) => {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-        {label && (
-          <label
-            htmlFor={id || name}
-            style={{ fontSize: '0.875rem', fontWeight: 500 }}
-          >
-            {label}
-            {required && (
-              <span style={{ color: '#EF4444', marginLeft: '0.25rem' }}>*</span>
-            )}
-          </label>
-        )}
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
         <input
           ref={ref}
           id={id || name}
@@ -59,25 +48,24 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           required={required}
           autoFocus={autoFocus}
           style={{
-            padding: '0.5rem 0.75rem',
-            borderRadius: '0.375rem',
-            border: `1px solid ${error ? '#EF4444' : '#D1D5DB'}`,
-            outline: 'none',
+            borderRadius: "0.375rem",
+            outline: "none",
+            caretColor: "#2563EB",
             ...(disabled && {
-              backgroundColor: '#F3F4F6',
-              cursor: 'not-allowed',
+              backgroundColor: "#F3F4F6",
+              cursor: "not-allowed",
             }),
             ...style,
           }}
         />
         {error && (
-          <p style={{ color: '#EF4444', fontSize: '0.875rem' }}>{error}</p>
+          <p style={{ color: "#EF4444", fontSize: "0.875rem" }}>{error}</p>
         )}
       </div>
     );
   }
 );
 
-TextInput.displayName = 'TextInput';
+TextInput.displayName = "TextInput";
 
 export default TextInput;
