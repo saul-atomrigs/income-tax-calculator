@@ -33,7 +33,9 @@ export default function ResultsPage() {
             <Button variant="secondary" onClick={() => navigate(ROUTES.start)}>
               처음으로
             </Button>
-            <Button onClick={() => navigate("/income")}>다시 계산하기</Button>
+            <Button onClick={() => navigate(ROUTES.refundEstimate)}>
+              환급액 찾기
+            </Button>
           </DualCTAButton>
         </div>
       </div>
