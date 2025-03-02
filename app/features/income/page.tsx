@@ -23,7 +23,7 @@ export default function SalaryInputPage() {
         <TextInput
           name="annualIncome"
           label="연봉"
-          type="number"
+          type="money"
           value={income}
           onChange={(e) => setIncome(e.target.value)}
           placeholder="연봉을 입력하세요"
