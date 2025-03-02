@@ -6,12 +6,12 @@ import Txt from "~/components/Txt";
 import {
   DEDUCTION_LABELS,
   DEDUCTIONS_INITIAL_STATE,
-} from "~/features/deductions/constants";
-import { useResult } from "~/features/results/context";
+} from "~/features/calculate-tax/deductions/constants";
 import { useCalculateTax } from "~/features/calculate-tax/hooks";
-import { useIncome } from "~/features/income/context";
-import { parseFormData } from "~/features/deductions/validate";
+import { parseFormData } from "~/features/calculate-tax/deductions/validate";
 import { ROUTES } from "~/routes";
+import { useIncome } from "../income/context";
+import { useResult } from "../results/context";
 
 export default function DeductionsPage() {
   const navigate = useNavigate();

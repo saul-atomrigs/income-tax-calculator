@@ -2,10 +2,10 @@ import { useNavigate } from "react-router";
 import { ErrorBoundary } from "react-error-boundary";
 import CTAButton from "~/components/CTAButton";
 import Txt from "~/components/Txt";
-import { useResult } from "~/features/results/context";
 import ResultList from "./list";
 import { ROUTES } from "~/routes";
 import { ResultErrorFallback } from "./error-fallback";
+import { useResult } from "./context";
 
 export default function ResultsPage() {
   const navigate = useNavigate();

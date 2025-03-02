@@ -2,14 +2,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
-import { IncomeProvider } from "~/features/income/context";
-import { ResultProvider } from "./features/results/context";
 
 import type { Route } from "./+types/root";
 import "./app.css";
 import Error from "./components/Error";
 import { MockProvider } from "./contexts/MockContext";
 import Loading from "./components/Loading";
+import { IncomeProvider } from "./features/calculate-tax/income/context";
+import { ResultProvider } from "./features/calculate-tax/results/context";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
