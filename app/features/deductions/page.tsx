@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router";
-import { useState } from "react";
-import CTAButton from "~/components/CTAButton";
-import TextInput from "~/components/TextInput";
-import Txt from "~/components/Txt";
-import { DEDUCTION_LABELS } from "~/features/deductions/constants";
-import { useCalculateTax } from "~/features/calculate-tax/hooks";
-import { useResult } from "~/features/results/context";
-import { useIncome } from "~/features/income/context";
-import { taxCalculationSchema } from "./schemas";
+import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import CTAButton from '~/components/CTAButton';
+import TextInput from '~/components/TextInput';
+import Txt from '~/components/Txt';
+import { DEDUCTION_LABELS } from '~/features/deductions/constants';
+import { useCalculateTax } from '~/features/calculate-tax/hooks';
+import { useResult } from '~/features/results/context';
+import { useIncome } from '~/features/income/context';
+import { taxCalculationSchema } from './schemas';
 
 export default function DeductionsPage() {
   const navigate = useNavigate();
@@ -16,10 +16,10 @@ export default function DeductionsPage() {
   const { calculateTaxAsync } = useCalculateTax();
 
   const [deductions, setDeductions] = useState({
-    nationalPension: "",
-    healthInsurance: "",
-    employmentInsurance: "",
-    otherDeductions: "",
+    nationalPension: '',
+    healthInsurance: '',
+    employmentInsurance: '',
+    otherDeductions: '',
   });
 
   const handleDeductionChange = (key: string, value: string) => {
@@ -42,9 +42,9 @@ export default function DeductionsPage() {
 
       const result = await calculateTaxAsync(validatedData);
       setCalculationResult(result);
-      navigate("/results");
+      navigate('/results');
     } catch (error) {
-      console.error("Calculation failed:", error);
+      console.error('Calculation failed:', error);
     }
   };
 
@@ -59,11 +59,11 @@ export default function DeductionsPage() {
           <TextInput
             key={key}
             name={key}
-            label={DEDUCTION_LABELS[key]}
-            type="number"
+            placeholder={DEDUCTION_LABELS[key]}
+            type="money"
             value={value}
             onChange={(e) => handleDeductionChange(key, e.target.value)}
-            placeholder="0"
+            autoFocus={key === 'nationalPension'}
           />
         ))}
 
