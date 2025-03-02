@@ -4,3 +4,10 @@ export const DEDUCTION_LABELS: Record<string, string> = {
   employmentInsurance: "고용보험",
   otherDeductions: "기타",
 };
+
+export const DEDUCTIONS_INITIAL_STATE = {
+  nationalPension: "",
+  healthInsurance: "",
+  employmentInsurance: "",
+  otherDeductions: "",
+};

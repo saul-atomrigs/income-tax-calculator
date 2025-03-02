@@ -1,50 +1,39 @@
-import { useNavigate } from 'react-router';
-import { useState } from 'react';
-import CTAButton from '~/components/CTAButton';
-import TextInput from '~/components/TextInput';
-import Txt from '~/components/Txt';
-import { DEDUCTION_LABELS } from '~/features/deductions/constants';
-import { useCalculateTax } from '~/features/calculate-tax/hooks';
-import { useResult } from '~/features/results/context';
-import { useIncome } from '~/features/income/context';
-import { taxCalculationSchema } from './schemas';
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import CTAButton from "~/components/CTAButton";
+import TextInput from "~/components/TextInput";
+import Txt from "~/components/Txt";
+import {
+  DEDUCTION_LABELS,
+  DEDUCTIONS_INITIAL_STATE,
+} from "~/features/deductions/constants";
+import { useResult } from "~/features/results/context";
+import { useCalculateTax } from "~/features/calculate-tax/hooks";
+import { useIncome } from "~/features/income/context";
+import { parseFormData } from "~/features/deductions/validate";
+import { ROUTES } from "~/routes";
 
 export default function DeductionsPage() {
   const navigate = useNavigate();
   const { income } = useIncome();
   const { setCalculationResult } = useResult();
-  const { calculateTaxAsync } = useCalculateTax();
-
-  const [deductions, setDeductions] = useState({
-    nationalPension: '',
-    healthInsurance: '',
-    employmentInsurance: '',
-    otherDeductions: '',
-  });
+  const { mutateAsync: calculateTax } = useCalculateTax();
+  const [deductions, setDeductions] = useState(DEDUCTIONS_INITIAL_STATE);
 
   const handleDeductionChange = (key: string, value: string) => {
     setDeductions((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleTaxCalculate = async (e: React.FormEvent) => {
+  const handleSubmitTaxForm = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const validatedData = taxCalculationSchema.parse({
-        annualIncome: Number(income),
-        deductions: {
-          nationalPension: Number(deductions.nationalPension) || undefined,
-          healthInsurance: Number(deductions.healthInsurance) || undefined,
-          employmentInsurance:
-            Number(deductions.employmentInsurance) || undefined,
-          otherDeductions: Number(deductions.otherDeductions) || undefined,
-        },
-      });
 
-      const result = await calculateTaxAsync(validatedData);
+    try {
+      const validatedData = parseFormData(income, deductions);
+      const result = await calculateTax(validatedData);
       setCalculationResult(result);
-      navigate('/results');
+      navigate(ROUTES.results);
     } catch (error) {
-      console.error('Calculation failed:', error);
+      console.error("Calculation failed:", error);
     }
   };
 
@@ -54,7 +43,7 @@ export default function DeductionsPage() {
         공제 항목을 입력해주세요
       </Txt>
 
-      <form onSubmit={handleTaxCalculate} className="container">
+      <form onSubmit={handleSubmitTaxForm} className="container">
         {Object.entries(deductions).map(([key, value]) => (
           <TextInput
             key={key}
@@ -63,7 +52,7 @@ export default function DeductionsPage() {
             type="money"
             value={value}
             onChange={(e) => handleDeductionChange(key, e.target.value)}
-            autoFocus={key === 'nationalPension'}
+            autoFocus={key === "nationalPension"}
           />
         ))}
 
