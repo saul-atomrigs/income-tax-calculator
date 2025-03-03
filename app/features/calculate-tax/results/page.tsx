@@ -9,6 +9,8 @@ import { ROUTES } from "~/routes";
 import { useResultContext } from "./context";
 import { useRefundEstimate } from "../../refund-estimate/hooks";
 
+const MOCKED_LAST_YEAR_TAX_PAID = 1_000_000;
+
 export default function ResultsPage() {
   const navigate = useNavigate();
   const { calculationResult } = useResultContext();
@@ -21,7 +23,7 @@ export default function ResultsPage() {
   const handleRefundEstimate = () => {
     refundMutation.mutate(
       {
-        lastYearTaxPaid: 1_000_000,
+        lastYearTaxPaid: MOCKED_LAST_YEAR_TAX_PAID,
         currentYearTax: calculationResult.totalTax,
       },
       {
