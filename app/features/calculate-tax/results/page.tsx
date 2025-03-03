@@ -8,12 +8,14 @@ import { ResultErrorFallback } from "./error-fallback";
 import { ROUTES } from "~/routes";
 import { useResultContext } from "./context";
 import { useRefundEstimate } from "../../refund-estimate/hooks";
+import { useRefundEstimateContext } from "~/features/refund-estimate/context";
 
 const MOCKED_LAST_YEAR_TAX_PAID = 1_000_000;
 
 export default function ResultsPage() {
   const navigate = useNavigate();
   const { calculationResult } = useResultContext();
+  const { setRefundResult } = useRefundEstimateContext();
   const refundMutation = useRefundEstimate();
 
   if (!calculationResult) {
@@ -27,7 +29,8 @@ export default function ResultsPage() {
         currentYearTax: calculationResult.totalTax,
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          setRefundResult(data);
           navigate(ROUTES.refundEstimate);
         },
       }

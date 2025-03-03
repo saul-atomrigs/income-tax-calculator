@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import { useRefundEstimateContext } from "./context";
 import {
   getRefundEstimateAPI,
   type RefundEstimateRequest,
@@ -7,8 +6,6 @@ import {
 } from "~/remotes";
 
 export function useRefundEstimate() {
-  const { setRefundResult } = useRefundEstimateContext();
-
   return useMutation({
     mutationFn: async (
       params: RefundEstimateRequest
@@ -21,9 +18,6 @@ export function useRefundEstimate() {
       const response = await getRefundEstimateAPI(request);
 
       return response;
-    },
-    onSuccess: (data) => {
-      setRefundResult(data);
     },
   });
 }
