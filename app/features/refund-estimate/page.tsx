@@ -8,7 +8,7 @@ export default function RefundEstimatePage() {
   const { lastName } = user.data;
 
   const { refundResult } = useRefundEstimateContext();
-  const { refundAmount } = refundResult;
+  const refundAmount = refundResult?.refundAmount ?? 0;
 
   const displayAmount =
     refundAmount < 0 ? Math.abs(refundAmount) : refundAmount;
