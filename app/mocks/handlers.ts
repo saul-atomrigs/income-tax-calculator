@@ -59,7 +59,11 @@ export const handlers = [
     });
   }),
 
-  // 2️⃣ 예상 세금 환급 계산
+  /**
+   * 2️⃣ 예상 세금 환급 계산
+   * /api/calculate-tax의 totalTax 값이 /api/refund-estimate의 currentYearTax에 해당함.
+   * lastYearTaxPaid 값은 작년에 낸 실제 세금이므로, 별도로 기록된 데이터를 가져와야 함.
+   */
   http.post("/api/refund-estimate", async ({ request }) => {
     const parsedResult = refundEstimateSchema.safeParse(await request.json());
 

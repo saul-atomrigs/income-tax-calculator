@@ -10,6 +10,7 @@ import { MockProvider } from "./contexts/MockContext";
 import Loading from "./components/Loading";
 import { IncomeProvider } from "./features/calculate-tax/income/context";
 import { ResultProvider } from "./features/calculate-tax/results/context";
+import { RefundEstimateProvider } from "./features/refund-estimate/context";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -51,9 +52,11 @@ export default function App() {
         <MockProvider>
           <IncomeProvider>
             <ResultProvider>
-              <Suspense fallback={<Loading message="Loading..." />}>
-                <Outlet />
-              </Suspense>
+              <RefundEstimateProvider>
+                <Suspense fallback={<Loading message="Loading..." />}>
+                  <Outlet />
+                </Suspense>
+              </RefundEstimateProvider>
             </ResultProvider>
           </IncomeProvider>
         </MockProvider>
