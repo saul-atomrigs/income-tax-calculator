@@ -14,6 +14,7 @@
     "@tanstack/react-query": "^5.66.9",
     "axios": "^1.8.1",
     "isbot": "^5.1.17",
+    "nanoid": "^5.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-error-boundary": "^5.0.0",
@@ -21,6 +22,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@mswjs/storage": "^0.1.0",
     "@react-router/dev": "^7.2.0",
     "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^20",
