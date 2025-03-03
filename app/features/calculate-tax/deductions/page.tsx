@@ -12,12 +12,19 @@ import { parseFormData } from "~/features/calculate-tax/deductions/validate";
 import { ROUTES } from "~/routes";
 import { useIncomeContext } from "../income/context";
 import { useResultContext } from "../results/context";
+import { useSaveTaxRecord } from "~/features/tax-record/hooks";
+import { useUser } from "~/features/user/hooks";
 
 export default function DeductionsPage() {
   const navigate = useNavigate();
+
   const { income } = useIncomeContext();
   const { setCalculationResult } = useResultContext();
+
+  const { data: user } = useUser();
   const { mutateAsync: calculateTax } = useCalculateTax();
+  const { mutateAsync: saveTaxRecord } = useSaveTaxRecord();
+
   const [deductions, setDeductions] = useState(DEDUCTIONS_INITIAL_STATE);
 
   const handleDeductionChange = (key: string, value: string) => {
@@ -29,7 +36,15 @@ export default function DeductionsPage() {
 
     try {
       const validatedData = parseFormData(income, deductions);
+      const { annualIncome } = validatedData;
       const result = await calculateTax(validatedData);
+      const { totalTax, netSalary } = result;
+      await saveTaxRecord({
+        userId: user.id,
+        annualIncome,
+        totalTax,
+        netSalary,
+      });
       setCalculationResult(result);
       navigate(ROUTES.results);
     } catch (error) {
