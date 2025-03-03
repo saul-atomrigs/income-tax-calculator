@@ -2,10 +2,10 @@ import { useNavigate } from "react-router";
 import CTAButton from "~/components/CTAButton";
 import TextInput from "~/components/TextInput";
 import Txt from "~/components/Txt";
-import { useIncome } from "./context";
+import { useIncomeContext } from "./context";
 
 export default function SalaryInputPage() {
-  const { income, setIncome } = useIncome();
+  const { income, setIncome } = useIncomeContext();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {

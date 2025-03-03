@@ -17,10 +17,10 @@ export function IncomeProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useIncome() {
+export function useIncomeContext() {
   const context = useContext(IncomeContext);
   if (!context) {
-    throw new Error("useIncome must be used within an IncomeProvider");
+    throw new Error("useIncomeContext must be used within an IncomeProvider");
   }
   return context;
 }
