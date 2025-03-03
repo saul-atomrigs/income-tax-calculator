@@ -14,6 +14,8 @@ import { useIncomeContext } from "../income/context";
 import { useResultContext } from "../results/context";
 import { useSaveTaxRecord } from "~/features/tax-record/hooks";
 import { useUser } from "~/features/user/hooks";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorFallback } from "../error-fallback";
 
 export default function DeductionsPage() {
   const navigate = useNavigate();
@@ -34,45 +36,46 @@ export default function DeductionsPage() {
   const handleSubmitTaxForm = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      const validatedData = parseFormData(income, deductions);
-      const { annualIncome } = validatedData;
-      const result = await calculateTax(validatedData);
-      const { totalTax, netSalary } = result;
-      await saveTaxRecord({
-        userId: user.id,
-        annualIncome,
-        totalTax,
-        netSalary,
-      });
-      setCalculationResult(result);
-      navigate(ROUTES.results);
-    } catch (error) {
-      console.error("Calculation failed:", error);
-    }
+    const validatedData = parseFormData(income, deductions);
+    const { annualIncome } = validatedData;
+    const result = await calculateTax(validatedData);
+    const { totalTax, netSalary } = result;
+    await saveTaxRecord({
+      userId: user.id,
+      annualIncome,
+      totalTax,
+      netSalary,
+    });
+    setCalculationResult(result);
+    navigate(ROUTES.results);
   };
 
   return (
-    <div className="container">
-      <Txt size="lg" weight="bold">
-        공제 항목을 입력해주세요
-      </Txt>
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onReset={() => navigate(ROUTES.start)}
+    >
+      <div className="container">
+        <Txt size="lg" weight="bold">
+          공제 항목을 입력해주세요
+        </Txt>
 
-      <form onSubmit={handleSubmitTaxForm} className="container">
-        {Object.entries(deductions).map(([key, value]) => (
-          <TextInput
-            key={key}
-            name={key}
-            placeholder={DEDUCTION_LABELS[key]}
-            type="money"
-            value={value}
-            onChange={(e) => handleDeductionChange(key, e.target.value)}
-            autoFocus={key === "nationalPension"}
-          />
-        ))}
+        <form onSubmit={handleSubmitTaxForm} className="container">
+          {Object.entries(deductions).map(([key, value]) => (
+            <TextInput
+              key={key}
+              name={key}
+              placeholder={DEDUCTION_LABELS[key]}
+              type="money"
+              value={value}
+              onChange={(e) => handleDeductionChange(key, e.target.value)}
+              autoFocus={key === "nationalPension"}
+            />
+          ))}
 
-        <CTAButton type="submit">계산하기</CTAButton>
-      </form>
-    </div>
+          <CTAButton type="submit">계산하기</CTAButton>
+        </form>
+      </div>
+    </ErrorBoundary>
   );
 }

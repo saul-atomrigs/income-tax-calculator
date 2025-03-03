@@ -3,7 +3,7 @@ import CTAButton from "~/components/CTAButton";
 import Txt from "~/components/Txt";
 import { ROUTES } from "~/routes";
 
-export function ResultErrorFallback({
+export function ErrorFallback({
   resetErrorBoundary,
 }: {
   resetErrorBoundary: () => void;

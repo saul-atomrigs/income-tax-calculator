@@ -4,7 +4,7 @@ import DualCTAButton from "~/components/DualCTAButton";
 import Button from "~/components/Button";
 import Txt from "~/components/Txt";
 import ResultList from "./list";
-import { ResultErrorFallback } from "./error-fallback";
+import { ErrorFallback } from "../error-fallback";
 import { ROUTES } from "~/routes";
 import { useResultContext } from "./context";
 import { useRefundEstimate } from "../../refund-estimate/hooks";
@@ -19,9 +19,7 @@ export default function ResultsPage() {
   const refundMutation = useRefundEstimate();
 
   if (!calculationResult) {
-    return (
-      <ResultErrorFallback resetErrorBoundary={() => navigate(ROUTES.start)} />
-    );
+    return <ErrorFallback resetErrorBoundary={() => navigate(ROUTES.start)} />;
   }
 
   const handleRefundEstimate = () => {
@@ -41,7 +39,7 @@ export default function ResultsPage() {
 
   return (
     <ErrorBoundary
-      FallbackComponent={ResultErrorFallback}
+      FallbackComponent={ErrorFallback}
       onReset={() => navigate(ROUTES.start)}
     >
       <div className="container">
