@@ -11,8 +11,7 @@ import Button from "~/components/Button";
 
 export default function RefundEstimatePage() {
   const navigate = useNavigate();
-  const user = useUser();
-  const { lastName } = user.data;
+  const { data: user } = useUser();
 
   const { refundResult } = useRefundEstimateContext();
   const refundAmount = refundResult?.refundAmount ?? 0;
@@ -26,7 +25,8 @@ export default function RefundEstimatePage() {
       onReset={() => navigate(ROUTES.start)}
     >
       <Txt size="xl" weight="bold">
-        {lastName}님의 환급액은 {formatToKoreanWon(displayAmount)}원 입니다.
+        {user.lastName}님의 환급액은 {formatToKoreanWon(displayAmount)}원
+        입니다.
       </Txt>
       <DualCTAButton>
         <Button variant="secondary" onClick={() => navigate(ROUTES.start)}>
