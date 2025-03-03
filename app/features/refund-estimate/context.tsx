@@ -1,7 +1,15 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { RefundEstimateResponse } from "~/remotes";
 
-const RefundEstimateContext = createContext(undefined);
+type RefundEstimateContextType = {
+  refundResult: RefundEstimateResponse | null;
+  setRefundResult: (result: RefundEstimateResponse) => void;
+  clearRefundResult: () => void;
+};
+
+const RefundEstimateContext = createContext<
+  RefundEstimateContextType | undefined
+>(undefined);
 
 export function RefundEstimateProvider({ children }: { children: ReactNode }) {
   const [refundResult, setRefundResultState] =
