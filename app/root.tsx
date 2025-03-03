@@ -11,6 +11,7 @@ import Loading from "./components/Loading";
 import { IncomeProvider } from "./features/calculate-tax/income/context";
 import { ResultProvider } from "./features/calculate-tax/results/context";
 import { RefundEstimateProvider } from "./features/refund-estimate/context";
+import { UserProvider } from "./features/user/context";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -50,15 +51,17 @@ export default function App() {
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <QueryClientProvider client={queryClient}>
         <MockProvider>
-          <IncomeProvider>
-            <ResultProvider>
-              <RefundEstimateProvider>
-                <Suspense fallback={<Loading message="Loading..." />}>
-                  <Outlet />
-                </Suspense>
-              </RefundEstimateProvider>
-            </ResultProvider>
-          </IncomeProvider>
+          <UserProvider>
+            <IncomeProvider>
+              <ResultProvider>
+                <RefundEstimateProvider>
+                  <Suspense fallback={<Loading message="Loading..." />}>
+                    <Outlet />
+                  </Suspense>
+                </RefundEstimateProvider>
+              </ResultProvider>
+            </IncomeProvider>
+          </UserProvider>
         </MockProvider>
       </QueryClientProvider>
     </ErrorBoundary>

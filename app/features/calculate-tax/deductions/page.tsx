@@ -13,9 +13,9 @@ import { ROUTES } from "~/routes";
 import { useIncomeContext } from "../income/context";
 import { useResultContext } from "../results/context";
 import { useSaveTaxRecord } from "~/features/tax-record/hooks";
-import { useUser } from "~/features/user/hooks";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "../error-fallback";
+import { useUserContext } from "~/features/user/context";
 
 export default function DeductionsPage() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function DeductionsPage() {
   const { income } = useIncomeContext();
   const { setCalculationResult } = useResultContext();
 
-  const { data: user } = useUser();
+  const { user } = useUserContext();
   const { mutateAsync: calculateTax } = useCalculateTax();
   const { mutateAsync: saveTaxRecord } = useSaveTaxRecord();
 
