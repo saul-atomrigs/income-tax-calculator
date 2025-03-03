@@ -4,10 +4,8 @@ import Txt from "~/components/Txt";
 import { ROUTES } from "~/routes";
 
 export function ResultErrorFallback({
-  error,
   resetErrorBoundary,
 }: {
-  error: Error;
   resetErrorBoundary: () => void;
 }) {
   const navigate = useNavigate();

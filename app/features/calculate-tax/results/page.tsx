@@ -19,7 +19,9 @@ export default function ResultsPage() {
   const refundMutation = useRefundEstimate();
 
   if (!calculationResult) {
-    throw new Error("다시 시도해주세요");
+    return (
+      <ResultErrorFallback resetErrorBoundary={() => navigate(ROUTES.start)} />
+    );
   }
 
   const handleRefundEstimate = () => {
