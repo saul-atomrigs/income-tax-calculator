@@ -19,10 +19,10 @@ export function ResultProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useResult() {
+export function useResultContext() {
   const context = useContext(ResultContext);
   if (!context) {
-    throw new Error("useResult must be used within ResultProvider");
+    throw new Error("useResultContext must be used within ResultProvider");
   }
   return context;
 }

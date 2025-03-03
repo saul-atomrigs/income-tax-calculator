@@ -6,12 +6,12 @@ import Txt from "~/components/Txt";
 import ResultList from "./list";
 import { ResultErrorFallback } from "./error-fallback";
 import { ROUTES } from "~/routes";
-import { useResult } from "./context";
+import { useResultContext } from "./context";
 import { useRefundEstimate } from "../../refund-estimate/hooks";
 
 export default function ResultsPage() {
   const navigate = useNavigate();
-  const { calculationResult } = useResult();
+  const { calculationResult } = useResultContext();
   const refundMutation = useRefundEstimate();
 
   if (!calculationResult) {

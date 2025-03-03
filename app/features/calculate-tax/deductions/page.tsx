@@ -11,12 +11,12 @@ import { useCalculateTax } from "~/features/calculate-tax/hooks";
 import { parseFormData } from "~/features/calculate-tax/deductions/validate";
 import { ROUTES } from "~/routes";
 import { useIncome } from "../income/context";
-import { useResult } from "../results/context";
+import { useResultContext } from "../results/context";
 
 export default function DeductionsPage() {
   const navigate = useNavigate();
   const { income } = useIncome();
-  const { setCalculationResult } = useResult();
+  const { setCalculationResult } = useResultContext();
   const { mutateAsync: calculateTax } = useCalculateTax();
   const [deductions, setDeductions] = useState(DEDUCTIONS_INITIAL_STATE);
 
