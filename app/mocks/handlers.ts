@@ -1,5 +1,8 @@
 import { http, HttpResponse } from "msw";
 import { z } from "zod";
+import { LiveStorage } from "@mswjs/storage";
+import { nanoid } from "nanoid";
+import type { TaxRecord } from "~/remotes";
 
 // Zod schemas
 const taxCalculationSchema = z.object({
@@ -26,12 +29,14 @@ const taxRecordSchema = z.object({
   netSalary: z.number(),
 });
 
+const taxRecords = new LiveStorage<TaxRecord[]>("taxRecords", []);
+
 export const handlers = [
   http.get("/user", () => {
     return HttpResponse.json({
-      id: "test-id",
-      firstName: "John",
-      lastName: "Maverick",
+      id: nanoid(),
+      firstName: "안",
+      lastName: "이솔",
     });
   }),
 
@@ -86,9 +91,18 @@ export const handlers = [
 
     const { userId, annualIncome, totalTax, netSalary } = parsedResult.data;
 
+    taxRecords.update((prevRecords) =>
+      prevRecords.concat({
+        userId,
+        annualIncome,
+        totalTax,
+        netSalary,
+      })
+    );
+
     return HttpResponse.json(
       {
-        recordId: "mock-record-id",
+        recordId: nanoid(),
         message: "Tax record saved successfully.",
       },
       { status: 201 }
@@ -97,22 +111,7 @@ export const handlers = [
 
   // 4️⃣ 세금 계산 기록 불러오기
   http.get("/api/tax-records", async () => {
-    return HttpResponse.json([
-      {
-        recordId: "mock1",
-        annualIncome: 50000000,
-        totalTax: 9750000,
-        netSalary: 40250000,
-        timestamp: "2025-02-24T10:00:00Z",
-      },
-      {
-        recordId: "mock2",
-        annualIncome: 60000000,
-        totalTax: 12000000,
-        netSalary: 48000000,
-        timestamp: "2024-12-15T15:30:00Z",
-      },
-    ]);
+    return HttpResponse.json(taxRecords.getValue());
   }),
 
   // 5️⃣ 계산 결과 PDF 다운로드 (Mock 파일)
