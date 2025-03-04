@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { initMockAPI } from "../mocks";
+import { initMockAPI } from ".";
 import Loading from "~/components/Loading";
 
 interface MockContextType {
