@@ -1,26 +1,27 @@
-import { spacing } from './design-tokens';
-import { colors } from './design-tokens';
+import { spacing } from "./design-tokens";
+import { colors } from "./design-tokens";
 
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
   fullWidth?: boolean;
   disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
 }
 
 export default function Button({
   children,
-  variant = 'primary',
+  variant = "primary",
   fullWidth = false,
   onClick,
   disabled = false,
-  type = 'button',
+  type = "button",
 }: ButtonProps) {
-  const bgColor = variant === 'primary' ? colors['primary-500'] : '#888888';
+  const bgColor =
+    variant === "primary" ? colors["primary-500"] : colors["secondary-600"];
   const hoverBgColor =
-    variant === 'primary' ? colors['primary-600'] : '#666666';
+    variant === "primary" ? colors["primary-600"] : colors["secondary-500"];
 
   return (
     <button
@@ -29,14 +30,14 @@ export default function Button({
       type={type}
       style={{
         backgroundColor: bgColor,
-        color: 'white',
+        color: "white",
         padding: `${spacing.small} ${spacing.large}`,
         borderRadius: `${spacing.tiny}`,
-        border: 'none',
-        cursor: disabled ? 'not-allowed' : 'pointer',
+        border: "none",
+        cursor: disabled ? "not-allowed" : "pointer",
         opacity: disabled ? 0.7 : 1,
-        width: fullWidth ? '100%' : 'auto',
-        transition: 'background-color 0.2s ease',
+        width: fullWidth ? "100%" : "auto",
+        transition: "background-color 0.2s ease",
       }}
       onMouseOver={(e) => {
         if (!disabled) {
