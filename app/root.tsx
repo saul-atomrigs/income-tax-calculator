@@ -8,10 +8,8 @@ import "./app.css";
 import Error from "./components/Error";
 import Loading from "./components/Loading";
 import { MockProvider } from "./mocks/context";
-import { IncomeProvider } from "./features/calculate-tax/income/context";
-import { ResultProvider } from "./features/calculate-tax/results/context";
-import { RefundEstimateProvider } from "./features/refund-estimate/context";
 import { UserProvider } from "./features/user/context";
+import { TaxProvider } from "./features/calculate-tax/context";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -53,13 +51,9 @@ export default function App() {
         <Suspense fallback={<Loading message="Loading..." />}>
           <MockProvider>
             <UserProvider>
-              <IncomeProvider>
-                <ResultProvider>
-                  <RefundEstimateProvider>
-                    <Outlet />
-                  </RefundEstimateProvider>
-                </ResultProvider>
-              </IncomeProvider>
+              <TaxProvider>
+                <Outlet />
+              </TaxProvider>
             </UserProvider>
           </MockProvider>
         </Suspense>
