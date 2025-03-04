@@ -14,7 +14,7 @@ export default function CTAButton({
   type = 'button',
 }: CTAButtonProps) {
   return (
-    <div className="cta-button-container">
+    <div className='cta-button-container'>
       <Button fullWidth onClick={onClick} disabled={disabled} type={type}>
         {children}
       </Button>

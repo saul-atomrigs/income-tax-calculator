@@ -18,9 +18,10 @@ export default function Button({
   disabled = false,
   type = 'button',
 }: ButtonProps) {
-  const bgColor = variant === 'primary' ? colors['primary-500'] : '#888888';
+  const bgColor =
+    variant === 'primary' ? colors['primary-500'] : colors['secondary-500'];
   const hoverBgColor =
-    variant === 'primary' ? colors['primary-600'] : '#666666';
+    variant === 'primary' ? colors['primary-600'] : colors['secondary-600'];
 
   return (
     <button
