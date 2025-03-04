@@ -50,19 +50,19 @@ export default function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <QueryClientProvider client={queryClient}>
-        <MockProvider>
-          <UserProvider>
-            <IncomeProvider>
-              <ResultProvider>
-                <RefundEstimateProvider>
-                  <Suspense fallback={<Loading message="Loading..." />}>
+        <Suspense fallback={<Loading message="Loading..." />}>
+          <MockProvider>
+            <UserProvider>
+              <IncomeProvider>
+                <ResultProvider>
+                  <RefundEstimateProvider>
                     <Outlet />
-                  </Suspense>
-                </RefundEstimateProvider>
-              </ResultProvider>
-            </IncomeProvider>
-          </UserProvider>
-        </MockProvider>
+                  </RefundEstimateProvider>
+                </ResultProvider>
+              </IncomeProvider>
+            </UserProvider>
+          </MockProvider>
+        </Suspense>
       </QueryClientProvider>
     </ErrorBoundary>
   );
