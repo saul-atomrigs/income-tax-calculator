@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router";
-import CTAButton from "~/components/CTAButton";
-import Txt from "~/components/Txt";
-import { useUser } from "~/features/user/hooks";
-import { ROUTES } from "~/routes";
+import { useNavigate } from 'react-router';
+import { CTAButton } from '~/components/CTAButton';
+import { Txt } from '~/components/Txt';
+import { useUser } from '~/features/user/hooks';
+import { ROUTES } from '~/routes';
 
 export default function Home() {
   const navigate = useNavigate();

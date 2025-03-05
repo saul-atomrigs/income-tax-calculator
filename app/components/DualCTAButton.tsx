@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
 interface DualCTAButtonProps {
   children: [React.ReactNode, React.ReactNode];
 }
 
-export default function DualCTAButton({ children }: DualCTAButtonProps) {
+export const DualCTAButton = ({ children }: DualCTAButtonProps) => {
   if (!Array.isArray(children) || children.length !== 2) {
-    throw new Error("DualCTAButton expects exactly two children");
+    throw new Error('DualCTAButton expects exactly two children');
   }
 
   return (
@@ -31,4 +31,4 @@ export default function DualCTAButton({ children }: DualCTAButtonProps) {
       `}</style>
     </div>
   );
-}
+};

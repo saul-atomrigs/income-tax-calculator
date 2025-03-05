@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router";
-import CTAButton from "~/components/CTAButton";
-import TextInput from "~/components/TextInput";
-import Txt from "~/components/Txt";
-import { useIncomeContext } from "./context";
+import { useNavigate } from 'react-router';
+import { CTAButton } from '~/components/CTAButton';
+import { TextInput } from '~/components/TextInput';
+import { Txt } from '~/components/Txt';
+import { useIncomeContext } from './context';
 
 export default function SalaryInputPage() {
   const { income, setIncome } = useIncomeContext();
@@ -10,12 +10,12 @@ export default function SalaryInputPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/deductions");
+    navigate('/deductions');
   };
 
   return (
     <>
-      <Txt size="2xl" weight="bold" style={{ marginBottom: "1rem" }}>
+      <Txt size="2xl" weight="bold" style={{ marginBottom: '1rem' }}>
         세금 계산기
       </Txt>
 

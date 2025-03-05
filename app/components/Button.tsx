@@ -10,14 +10,14 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
 }
 
-export default function Button({
+export const Button = ({
   children,
   variant = 'primary',
   fullWidth = false,
   onClick,
   disabled = false,
   type = 'button',
-}: ButtonProps) {
+}: ButtonProps) => {
   const bgColor =
     variant === 'primary' ? colors['primary-500'] : colors['secondary-500'];
   const hoverBgColor =
@@ -53,4 +53,4 @@ export default function Button({
       {children}
     </button>
   );
-}
+};

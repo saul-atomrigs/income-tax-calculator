@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import CTAButton from "~/components/CTAButton";
-import TextInput from "~/components/TextInput";
-import Txt from "~/components/Txt";
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { CTAButton } from '~/components/CTAButton';
+import { TextInput } from '~/components/TextInput';
+import { Txt } from '~/components/Txt';
 import {
   DEDUCTION_LABELS,
   DEDUCTIONS_INITIAL_STATE,
-} from "~/features/calculate-tax/deductions/constants";
-import { useCalculateTax } from "~/features/calculate-tax/hooks";
-import { parseFormData } from "~/features/calculate-tax/deductions/validate";
-import { ROUTES } from "~/routes";
-import { useIncomeContext } from "../income/context";
-import { useResultContext } from "../results/context";
-import { useSaveTaxRecord } from "~/features/tax-record/hooks";
-import { ErrorBoundary } from "react-error-boundary";
-import { ErrorFallback } from "../error-fallback";
-import { useUserContext } from "~/features/user/context";
+} from '~/features/calculate-tax/deductions/constants';
+import { useCalculateTax } from '~/features/calculate-tax/hooks';
+import { parseFormData } from '~/features/calculate-tax/deductions/validate';
+import { ROUTES } from '~/routes';
+import { useIncomeContext } from '../income/context';
+import { useResultContext } from '../results/context';
+import { useSaveTaxRecord } from '~/features/tax-record/hooks';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorFallback } from '../error-fallback';
+import { useUserContext } from '~/features/user/context';
 
 export default function DeductionsPage() {
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ export default function DeductionsPage() {
               type="money"
               value={value}
               onChange={(e) => handleDeductionChange(key, e.target.value)}
-              autoFocus={key === "nationalPension"}
+              autoFocus={key === 'nationalPension'}
             />
           ))}
 

@@ -1,4 +1,4 @@
-import Txt from "~/components/Txt";
+import { Txt } from '~/components/Txt';
 
 export default function ResultItem({
   label,
@@ -12,7 +12,7 @@ export default function ResultItem({
   return (
     <div className="flex justify-between items-center">
       <Txt size="lg">{label}</Txt>
-      <Txt size="lg" weight={highlight ? "bold" : "normal"}>
+      <Txt size="lg" weight={highlight ? 'bold' : 'normal'}>
         {value}
       </Txt>
     </div>

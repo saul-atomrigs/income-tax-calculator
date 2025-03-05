@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RefundEstimateProvider } from "./features/refund-estimate/context";
+import type { ReactNode } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RefundEstimateProvider } from './features/refund-estimate/context';
 
 // Add any other providers your app uses
 

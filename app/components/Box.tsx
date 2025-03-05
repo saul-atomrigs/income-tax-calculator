@@ -9,14 +9,14 @@ interface BoxProps {
   style?: React.CSSProperties;
 }
 
-export default function Box({
+export const Box = ({
   children,
   bg = colors.white,
   padding = '1rem',
   onClick,
   align = 'left',
   style,
-}: BoxProps) {
+}: BoxProps) => {
   return (
     <div
       onClick={onClick}
@@ -44,4 +44,4 @@ export default function Box({
       {children}
     </div>
   );
-}
+};

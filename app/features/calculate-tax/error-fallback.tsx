@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router";
-import CTAButton from "~/components/CTAButton";
-import Txt from "~/components/Txt";
-import { ROUTES } from "~/routes";
+import { useNavigate } from 'react-router';
+import { CTAButton } from '~/components/CTAButton';
+import { Txt } from '~/components/Txt';
+import { ROUTES } from '~/routes';
 
 export function ErrorFallback({
   resetErrorBoundary,

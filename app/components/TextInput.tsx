@@ -17,7 +17,7 @@ interface TextInputProps {
   autoFocus?: boolean;
 }
 
-const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       id,
@@ -79,5 +79,3 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 );
 
 TextInput.displayName = 'TextInput';
-
-export default TextInput;
