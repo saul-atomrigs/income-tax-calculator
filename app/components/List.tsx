@@ -1,25 +1,25 @@
 interface ListProps {
   children: React.ReactNode;
-  direction: "horizontal" | "vertical";
+  direction: 'horizontal' | 'vertical';
 }
 
-export default function List({ direction, children }: ListProps) {
+export const List = ({ direction, children }: ListProps) => {
   return (
     <div
       style={{
-        width: "100%",
-        overflow: direction === "horizontal" ? "auto" : "visible",
-        WebkitOverflowScrolling: "touch",
+        width: '100%',
+        overflow: direction === 'horizontal' ? 'auto' : 'visible',
+        WebkitOverflowScrolling: 'touch',
       }}
     >
       <div
         style={{
-          display: "flex",
-          flexDirection: direction === "horizontal" ? "row" : "column",
-          gap: "1rem",
-          ...(direction === "horizontal" && {
-            flexWrap: "nowrap",
-            minWidth: "min-content",
+          display: 'flex',
+          flexDirection: direction === 'horizontal' ? 'row' : 'column',
+          gap: '1rem',
+          ...(direction === 'horizontal' && {
+            flexWrap: 'nowrap',
+            minWidth: 'min-content',
           }),
         }}
       >
@@ -27,4 +27,4 @@ export default function List({ direction, children }: ListProps) {
       </div>
     </div>
   );
-}
+};

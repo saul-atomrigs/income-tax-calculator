@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { initMockAPI } from "../mocks";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { initMockAPI } from '.';
+import { Loading } from '~/components/Loading';
 
 interface MockContextType {
   isMockReady: boolean;
@@ -19,7 +20,7 @@ export function MockProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   if (!isMockReady) {
-    return <div>Initializing...</div>;
+    return <Loading message="데이터 불러오는 중..." />;
   }
 
   return (
@@ -32,7 +33,7 @@ export function MockProvider({ children }: { children: React.ReactNode }) {
 export function useMock() {
   const context = useContext(MockContext);
   if (context === undefined) {
-    throw new Error("useMock must be used within a MockProvider");
+    throw new Error('useMock must be used within a MockProvider');
   }
   return context;
 }
