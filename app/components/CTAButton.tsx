@@ -1,19 +1,21 @@
-import Button from './Button';
+import { Button } from './Button';
 
 interface CTAButtonProps {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-export default function CTAButton({
+export const CTAButton = ({
   children,
   onClick,
   disabled,
-}: CTAButtonProps) {
+  type = 'button',
+}: CTAButtonProps) => {
   return (
-    <div className='cta-button-container'>
-      <Button fullWidth onClick={onClick} disabled={disabled}>
+    <div className="cta-button-container">
+      <Button fullWidth onClick={onClick} disabled={disabled} type={type}>
         {children}
       </Button>
       <style>{`
@@ -27,4 +29,4 @@ export default function CTAButton({
       `}</style>
     </div>
   );
-}
+};

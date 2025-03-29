@@ -2,7 +2,7 @@ interface LoadingProps {
   message?: string;
 }
 
-export default function Loading({ message = 'Loading...' }: LoadingProps) {
+export const Loading = ({ message = 'Loading...' }: LoadingProps) => {
   return (
     <div
       style={{
@@ -25,4 +25,4 @@ export default function Loading({ message = 'Loading...' }: LoadingProps) {
       <span style={{ color: '#4b5563' }}>{message}</span>
     </div>
   );
-}
+};

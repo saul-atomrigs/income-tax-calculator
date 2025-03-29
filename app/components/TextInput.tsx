@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import type { ChangeEvent } from 'react';
+import { formatMoney } from './shared/utils';
 
 interface TextInputProps {
   id?: string;
@@ -8,7 +9,7 @@ interface TextInputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   placeholder?: string;
-  type?: 'text' | 'email' | 'password' | 'number' | 'date';
+  type?: 'text' | 'email' | 'password' | 'number' | 'date' | 'money';
   error?: string;
   required?: boolean;
   disabled?: boolean;
@@ -16,7 +17,7 @@ interface TextInputProps {
   autoFocus?: boolean;
 }
 
-const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       id,
@@ -30,39 +31,33 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       required = false,
       disabled = false,
       style = {},
-      autoFocus = false,
+      autoFocus = true,
     },
     ref
   ) => {
+    const handleMoneyChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value.replace(/[^0-9]/g, '');
+      e.target.value = value;
+      onChange(e);
+    };
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-        {label && (
-          <label
-            htmlFor={id || name}
-            style={{ fontSize: '0.875rem', fontWeight: 500 }}
-          >
-            {label}
-            {required && (
-              <span style={{ color: '#EF4444', marginLeft: '0.25rem' }}>*</span>
-            )}
-          </label>
-        )}
         <input
           ref={ref}
           id={id || name}
           name={name}
-          type={type}
+          type={type === 'money' ? 'text' : type}
           value={value}
-          onChange={onChange}
+          onChange={type === 'money' ? handleMoneyChange : onChange}
           placeholder={placeholder}
           disabled={disabled}
           required={required}
           autoFocus={autoFocus}
           style={{
-            padding: '0.5rem 0.75rem',
             borderRadius: '0.375rem',
-            border: `1px solid ${error ? '#EF4444' : '#D1D5DB'}`,
             outline: 'none',
+            caretColor: '#2563EB',
             ...(disabled && {
               backgroundColor: '#F3F4F6',
               cursor: 'not-allowed',
@@ -70,6 +65,11 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             ...style,
           }}
         />
+        {type === 'money' && value && (
+          <p style={{ color: '#4B5563', fontSize: '0.875rem' }}>
+            {formatMoney(value)}
+          </p>
+        )}
         {error && (
           <p style={{ color: '#EF4444', fontSize: '0.875rem' }}>{error}</p>
         )}
@@ -79,5 +79,3 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 );
 
 TextInput.displayName = 'TextInput';
-
-export default TextInput;

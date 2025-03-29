@@ -1,21 +1,23 @@
-import { spacing } from '../design-tokens';
-import { colors } from '../design-tokens';
+import { spacing } from './design-tokens';
+import { colors } from './design-tokens';
 
 interface ButtonProps {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-export default function Button({
+export const Button = ({
   children,
   variant = 'primary',
   fullWidth = false,
   onClick,
   disabled = false,
-}: ButtonProps) {
+  type = 'button',
+}: ButtonProps) => {
   const bgColor =
     variant === 'primary' ? colors['primary-500'] : colors['secondary-500'];
   const hoverBgColor =
@@ -25,6 +27,7 @@ export default function Button({
     <button
       onClick={onClick}
       disabled={disabled}
+      type={type}
       style={{
         backgroundColor: bgColor,
         color: 'white',
@@ -50,4 +53,4 @@ export default function Button({
       {children}
     </button>
   );
-}
+};
